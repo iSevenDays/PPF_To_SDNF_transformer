@@ -56,4 +56,5 @@ function buildMatrix(str){
 
 var matrix = buildMatrix('A^BvC');
 for (key in matrix)
-	console.log(key+' => '+matrix[key]);
+	if (typeof(matrix[key]) != "function")
+		console.log(key+' => '+matrix[key]);
