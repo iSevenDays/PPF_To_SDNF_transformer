@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Хлам</title>
+	<script src="scripts.js"></script>
+	<script>
+		function calc(){
+			var value = document.getElementsByTagName('input')[0].value;
+			
+			var result = buildMatrix(value);
+			
+			var output = 'Таблица истинности: \n';
+			output += '<span style="text-decoration:underline;">'+result.vars.join('')+' => '+value+'</span>\n';
+			for (key in result.matrix)
+				if (typeof(result.matrix[key]) != "function")
+					output += key+' => '+(result.matrix[key] ? 1 : 0)+'\n';
+			output += '\nСДНФ: '+getSDNF(result.vars, result.matrix)+'\n';
+			output += 'СКНФ: '+getSKNF(result.vars, result.matrix)+'\n';
+			
+			document.getElementById('output').innerHTML = output;
+		}
+	</script>
+	<meta charset="utf-8">
+</head>
+<body>
+	<pre>^ - Дизъюнкция (сложение)</pre>
+	<pre>v - Конъюнкция (умножение)</pre>
+	<pre>! - Отрицание</pre>
+	<pre>= - Эквиваленция</pre>
+	<input value="A^(Bv!C)"><button onClick="calc();">Посчитать</button>
+	<pre id="output"></pre>
+</body>
+</html>
