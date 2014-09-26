@@ -1,6 +1,9 @@
 var operations = {
 	'^': '&&',
-	'v': '||'
+	'v': '||',
+	'!': '!',
+	'(': '(',
+	')': ')',
 };
 
 Array.prototype.contains = function(v) {
