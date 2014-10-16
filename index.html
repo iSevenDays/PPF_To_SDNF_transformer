@@ -11,9 +11,14 @@
 			
 			var output = 'Таблица истинности: \n';
 			output += '<span style="text-decoration:underline;">'+result.vars.join('')+' => '+value+'</span>\n';
+			var lines = [];
 			for (key in result.matrix)
 				if (typeof(result.matrix[key]) != "function")
-					output += key+' => '+(result.matrix[key] ? 1 : 0)+'\n';
+					lines.push(key+' => '+(result.matrix[key] ? 1 : 0));
+			for (var i=lines.length/2; i<lines.length; i++)
+				output += lines[i]+'\n';
+			for (var i=0; i<lines.length/2; i++)
+				output += lines[i]+'\n';
 			output += '\nСДНФ: '+getSDNF(result.vars, result.matrix)+'\n';
 			output += 'СКНФ: '+getSKNF(result.vars, result.matrix)+'\n';
 			
@@ -25,6 +30,7 @@
 <body>
 	<pre>v - Дизъюнкция (сложение)</pre>
 	<pre>^ - Конъюнкция (умножение)</pre>
+	<pre>-> - Импликация</pre>
 	<pre>! - Отрицание</pre>
 	<pre>= - Эквиваленция</pre>
 	<input value="A^(Bv!C)"><button onClick="calc();">Посчитать</button>

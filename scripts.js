@@ -5,6 +5,7 @@ var operations = {
 	'(': '(',
 	')': ')',
 	'=': '==',
+	'->': '^1||'
 };
 
 Array.prototype.contains = function(v) {
