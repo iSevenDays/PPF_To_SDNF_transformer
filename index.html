@@ -8,15 +8,15 @@
 			var value = document.getElementsByTagName('input')[0].value;
 			
 			try{
-				var result = buildMatrix(value);
+				var trans = new Transformer(value);
 				var output = 'Таблица истинности: \n';
-				output += '<span style="text-decoration:underline;">'+result.vars.join('')+' => '+value+'</span>\n';
+				output += '<span style="text-decoration:underline;">'+trans.vars.join('')+' => '+value+'</span>\n';
 				
 				//Построение вывода таблицы истинности
 				var lines = [];
-				for (key in result.matrix)
-					if (typeof(result.matrix[key]) != "function")
-						lines.push(key+' => '+(result.matrix[key] ? 1 : 0));
+				for (key in trans.getMatrix())
+					if (typeof(trans.getMatrix()[key]) != "function")
+						lines.push(key+' => '+(trans.getMatrix()[key] ? 1 : 0));
 						
 				//Сортировка строк в таблице истинности
 				for (var i=lines.length/2; i<lines.length; i++)
@@ -24,8 +24,8 @@
 				for (var i=0; i<lines.length/2; i++)
 					output += lines[i]+'\n';
 				
-				output += '\nСДНФ: '+getSDNF(result.vars, result.matrix)+'\n';
-				output += 'СКНФ: '+getSKNF(result.vars, result.matrix)+'\n';
+				output += '\nСДНФ: '+trans.getSDNF()+'\n';
+				output += 'СКНФ: '+trans.getSKNF()+'\n';
 			}catch(e){
 				alert(e);
 				output = 'Ошибка!';
@@ -37,12 +37,13 @@
 	<meta charset="utf-8">
 </head>
 <body>
-	<pre>v	∨	- Дизъюнкция (сложение)</pre>
-	<pre>^ 	∧	- Конъюнкция (умножение)</pre>
-	<pre>->	→	- Импликация</pre>
-	<pre>!	¬	- Отрицание</pre>
-	<pre>=	↔	- Эквиваленция</pre>
-	<input value="A^(Bv!C)"><button onClick="calc();">Посчитать</button>
+	<pre>v	∨	- Дизъюнкция (сложение)
+^ 	∧	- Конъюнкция (умножение)
+->	→	- Импликация
+!	¬	- Отрицание
+=	↔	- Эквиваленция
+|		- Штрих Шеффера</pre>
+	<input value="A^(Bv!C)" style="padding:5px 10px;width:400px;font-family:monospace;"> <button onClick="calc();" style="padding:5px 10px;">Посчитать</button>
 	<pre id="output"></pre>
 </body>
 </html>
