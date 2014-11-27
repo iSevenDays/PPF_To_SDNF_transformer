@@ -9,6 +9,7 @@
 			
 			try{
 				var trans = new Transformer(value);
+				trans.clearing = document.getElementById('enableClearing').checked;
 				var output = 'Таблица истинности: \n';
 				output += '<span style="text-decoration:underline;">'+trans.vars.join('')+' => '+value+'</span>\n';
 				
@@ -44,6 +45,8 @@
 =	↔	- Эквиваленция
 |		- Штрих Шеффера</pre>
 	<input value="A^(Bv!C)" style="padding:5px 10px;width:400px;font-family:monospace;"> <button onClick="calc();" style="padding:5px 10px;">Посчитать</button>
+	<input type="checkbox" checked id="enableClearing">
+	<label for="enableClearing">Включить сокращение</label>
 	<pre id="output"></pre>
 </body>
 </html>

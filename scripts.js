@@ -67,6 +67,7 @@ function Transformer(str) {
 	* @return Совершенная дизъюнктивная нормальная форма
 	*/
 	this.getSDNF = function(){
+		var matrix = this.clearing ? this._clearMatrix() : this.matrix;
 		var result = '';
 		for (key in matrix){
 			//Отсеиваем только нужные ключи
@@ -99,6 +100,7 @@ function Transformer(str) {
 	* @return Совершенная конъюнктивная нормальная форма
 	*/
 	this.getSKNF = function(){
+		var matrix = this.clearing ? this._clearMatrix() : this.matrix;
 		var result = '';
 		for (key in matrix){
 			if (key.length === this.vars.length && this._isKeyValid(key) && matrix[key] === false){
@@ -207,6 +209,7 @@ function Transformer(str) {
 		return this.matrix;
 	}
 	
+	this.clearing = false;
 	
 	this.expression = str;
 	
