@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Хлам</title>
+	<title>Преобразователь ППФ в СДНФ и СКНФ</title>
 	<script src="scripts.js"></script>
 	<script>
 		function calc(){
@@ -20,10 +20,15 @@
 						lines.push(key+' => '+(trans.getMatrix()[key] ? 1 : 0));
 						
 				//Сортировка строк в таблице истинности
-				for (var i=lines.length/2; i<lines.length; i++)
-					output += lines[i]+'\n';
-				for (var i=0; i<lines.length/2; i++)
-					output += lines[i]+'\n';
+				if (lines[0].substr(0, 1) == '1'){
+					for (var i=lines.length/2; i<lines.length; i++)
+						output += lines[i]+'\n';
+					for (var i=0; i<lines.length/2; i++)
+						output += lines[i]+'\n';
+				}else{
+					for (var i=0; i<lines.length; i++)
+						output += lines[i]+'\n';
+				}
 				
 				output += '\nСДНФ: '+trans.getSDNF()+'\n';
 				output += 'СКНФ: '+trans.getSKNF()+'\n';
